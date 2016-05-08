@@ -1,27 +1,25 @@
-# AzerothJS
+# AzerothJS中文文档
 
-AzerothJS is an open source blog engine running on static file servers such as Github Pages or any web hosting. 
-
-In short: 100% client-side JavaScript. 
+AzerothJS是一个可以运行在github pages或其他web服务器上的开源的静态博客引擎，AzerothJS是100%纯粹客户端的博客。
 
 ![](./img/azeroth_screenshot.png)
 
 ## Live demo
 Check out the [live demo here](http://huytd.github.io/azeroth-js/)
 
-## What makes AzerothJS cool?
+## 为什么AcerothJS如此的酷?
 
-- Super lightweight
-- No installation needed
-- No server side code
-- Made for Github Pages
-- Easy to customization
-- Static HTML Generator
+- 超级轻量级
+- 开箱即用
+- 不需要服务端代码
+- 专注于Github Pages
+- 很容易进行个性化配置
+- 可以把markdown文件生成静态HTML文件
 
-## How to use?
+## 如何使用
 
-### Run locally
-1. Clone this project to your computer
+### 跑在本地
+1. 克隆当前项目到你本地
 2. Start simple HTTP server with Python:
   ```
   python -m SimpleHTTPServer

@@ -1,0 +1,688 @@
+<html>
+    <head>
+        <title> Angular2学习指南 | Blog</title>
+        <meta charset="utf-8">
+        <meta http-equiv="content-type" content="text/html;"><meta name=viewport content="initial-scale=1.0 maximum-scale=1.0">
+        
+        <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,300&subset=latin,vietnamese' rel='stylesheet' type='text/css'>
+        <link href="../css/theme.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../css/highlight/tomorrow-night.css">
+        <link rel="stylesheet" href="../css/fontello.css">
+        <script src="../js/highlight.pack.js"></script>
+        <script>
+        hljs.initHighlightingOnLoad();
+        </script>
+    </head>
+    <body>
+        <div class="header">
+            <a href="/"><i class="icon icon-emo-coffee"></i> Blog</a>
+        </div>
+        <div class="container">
+            <div class="main">
+                <h1 id="angular2-">Angular2学习指南</h1>
+<h2 id="ng2-">ng2新添特性</h2>
+<ul>
+<li>Form Builder 表单创建器</li>
+<li>Change Detection </li>
+<li>Templating 模板</li>
+<li>Routing 路由</li>
+<li>Annotations 注解</li>
+<li>Observables</li>
+<li>Shadow DOM </li>
+<li>以组件而非DOM为核心 </li>
+</ul>
+<h2 id="ng2-">ng2依赖的库的解释</h2>
+<ul>
+<li>systemjs - 通用模块加载器，支持AMD、CommonJS、ES6等各种格式的JS模块加载</li>
+</ul>
+<h2 id="ng1-ng2-">ng1和ng2的区别</h2>
+<ul>
+<li>移除了$scope,$watch</li>
+<li>主要用component来替代以前的directive,除此之外还有属性指令，结构指令</li>
+<li>采用ES6的模块化机制</li>
+<li>采用typescript，所以一定要预编译</li>
+</ul>
+<h2 id="es6-">ES6相关</h2>
+<h3 id="-">类</h3>
+<pre><code class="lang-javascript">class Hamburger {
+  constructor() {
+    // 这是构造器.
+  }
+  listToppings() {
+    //这是Hamburger类的一个方法
+  }
+}
+</code></pre>
+<h3 id="-spread">...spread</h3>
+<pre><code>const add = (a,b) =&gt; a + b;
+let args = [3,5];
+add(...args);//等价于 add(args[0],args[1]) 或 add.apply(null,args)
+</code></pre><pre><code>let cde = [&#39;c&#39;,&#39;d&#39;,&#39;e&#39;];
+let scale = [&#39;a&#39;,&#39;b&#39;,...cde,&#39;f&#39;,&#39;g&#39;];//等价于 [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;e&#39;, &#39;f&#39;, &#39;g&#39;]
+</code></pre><h2 id="ts-">TS相关</h2>
+<p>为了玩ts,我们需要装相关的npm包</p>
+<pre><code>
+C:\Users\1&gt; npm install -g typescript &lt;--安装ts相关的npm
+
+C:\Users\1&gt;tsc &lt;--检测是否安装成功
+Version 1.8.10
+Syntax:   tsc [options] [file ...]
+
+Examples: tsc hello.ts
+          tsc --out file.js file.ts
+          tsc @args.txt
+
+Options:
+ --allowJs                           Allow javascript files to be compiled.
+ --allowSyntheticDefaultImports      Allow default imports from modules with no default export. This does not affect code emit, just typechecking.
+ --allowUnreachableCode              Do not report errors on unreachable code.
+ --allowUnusedLabels                 Do not report errors on unused labels.
+ -d, --declaration                   Generates corresponding &#39;.d.ts&#39; file.
+ --experimentalDecorators            Enables experimental support for ES7 decorators.
+ --forceConsistentCasingInFileNames  Disallow inconsistently-cased references to the same file.
+ -h, --help                          Print this message.
+ --init                              Initializes a TypeScript project and creates a tsconfig.json file.
+ --jsx KIND                          Specify JSX code generation: &#39;preserve&#39; or &#39;react&#39;
+ --mapRoot LOCATION                  Specifies the location where debugger should locate map files instead of generated locations.
+ -m KIND, --module KIND              Specify module code generation: &#39;commonjs&#39;, &#39;amd&#39;, &#39;system&#39;, &#39;umd&#39; or &#39;es2015&#39;
+ --moduleResolution                  Specifies module resolution strategy: &#39;node&#39; (Node.js) or &#39;classic&#39; (TypeScript pre-1.6).
+ --newLine NEWLINE                   Specifies the end of line sequence to be used when emitting files: &#39;CRLF&#39; (dos) or &#39;LF&#39; (unix).
+ --noEmit                            Do not emit outputs.
+ --noEmitOnError                     Do not emit outputs if any errors were reported.
+ --noFallthroughCasesInSwitch        Report errors for fallthrough cases in switch statement.
+ --noImplicitAny                     Raise error on expressions and declarations with an implied &#39;any&#39; type.
+ --noImplicitReturns                 Report error when not all code paths in function return a value.
+ --noImplicitUseStrict               Do not emit &#39;use strict&#39; directives in module output.
+ --outDir DIRECTORY                  Redirect output structure to the directory.
+ --outFile FILE                      Concatenate and emit output to single file.
+ --preserveConstEnums                Do not erase const enum declarations in generated code.
+ --pretty KIND                       Stylize errors and messages using color and context. (experimental)
+ -p DIRECTORY, --project DIRECTORY   Compile the project in the given directory.
+ --reactNamespace                    Specifies the object invoked for createElement and __spread when targeting &#39;react&#39; JSX emit
+ --removeComments                    Do not emit comments to output.
+ --rootDir LOCATION                  Specifies the root directory of input files. Use to control the output directory structure with --outDir.
+ --sourceMap                         Generates corresponding &#39;.map&#39; file.
+ --sourceRoot LOCATION               Specifies the location where debugger should locate TypeScript files instead of source locations.
+ --suppressImplicitAnyIndexErrors    Suppress noImplicitAny errors for indexing objects lacking index signatures.
+ -t VERSION, --target VERSION        Specify ECMAScript target version: &#39;ES3&#39; (default), &#39;ES5&#39;, or &#39;ES2015&#39; (experimental)
+ -v, --version                       Print the compiler&#39;s version.
+ -w, --watch                         Watch input files.
+ @&lt;file&gt;                             Insert command line options and files from a file.
+</code></pre><p>比如我们创建一个ts文件：</p>
+<pre><code>class Pizza {
+  toppings: string[];
+  constructor(toppings: string[]) {
+    this.toppings = toppings;
+  }
+}
+</code></pre><p>然后我们就可以用编译成原始的js(命令tsc 1.js)</p>
+<pre><code>var Pizza = (function () {
+    function Pizza(toppings) {
+        this.toppings = toppings;
+    }
+    return Pizza;
+}());
+</code></pre><p>ng2目录里的tsconfig.json主要就是ts相关的配置</p>
+<h3 id="-">定义函数</h3>
+<pre><code class="lang-javascript">function add(a:number,b:number){
+    return a + b;
+}
+
+add(1,3);
+add(1,&#39;3&#39;);//会报错
+</code></pre>
+<h3 id="typings">typings</h3>
+<p>我们观察ng2的文件目录会发现里面有一个文件叫typings.json</p>
+<pre><code>{&quot;ambientDependencies&quot;: {&quot;es6-shim&quot;: &quot;github:DefinitelyTyped/DefinitelyTyped/es6-shim/es6-shim.d.ts#7de6c3dd94feaeb21f20054b9f30d5dabc5efabd&quot;,&quot;jasmine&quot;: &quot;github:DefinitelyTyped/DefinitelyTyped/jasmine/jasmine.d.ts#5c182b9af717f73146399c2485f70f1e2ac0ff2b&quot;}}
+</code></pre><p>当使用外部JavaScript库或新的宿主API时,我们需要创建一个这个文件。</p>
+<h3 id="typescript-">typescript类别信息</h3>
+<ul>
+<li>boolean(true/false)</li>
+<li>number </li>
+<li>string</li>
+<li>[] 数组，如果这个数组用来存数字类型的，可以用number[],如果是布尔型的，可以用boolean[]</li>
+<li>{} 对象字面量</li>
+<li>undefined</li>
+<li>enum 枚举类型 比如{Red,Blue,Green}</li>
+<li>any 可以用任何类型</li>
+<li>void </li>
+</ul>
+<pre><code>let isDown:boolean = false;
+let decLiteral = 6;
+let hexLiteral:number = 0xf00d;
+let name:string = &#39;bob&#39;;
+let list:number[] = [1,23,3];
+let list:Array&lt;number&gt; = [1,2,3];
+let x:[string,number] = [&#39;hello&#39;,0];
+enum Color {Red,Green,Blue};
+let notSure:any = 4;
+function warnUser():void{
+    alert(&quot;This is my warning message&quot;);
+}
+let strLength:number = (&lt;string&gt;someValue).length;
+let someValue:any = &quot;this is a string&quot;;
+</code></pre><h2 id="bootstap-twitter-bootstrap-">bootstap(启动，不是指twitter的bootstrap)</h2>
+<p>在main文件中，我们需要这样初始化：</p>
+<pre><code class="lang-javascript">import {Component,bootstrap} from &#39;angular2/angular2&#39;;
+@Component({
+    selector:&quot;my-app&quot;,
+    template:&quot;&lt;h1&gt;Hello {{name}}&lt;/h1&gt;&quot;
+})
+
+class MyApp{
+    constructor(){
+        this.name = &#39;Max&#39;;
+    }
+}
+
+bootstrap(MyApp);
+</code></pre>
+<h2 id="components">components</h2>
+<p>为了创建一个ng2应用你应该定义一组components,每一个UI组件、路由。一个应用包含一个根组件和一系列其他组件，换句话说，每个ng2会包含一棵component树。Application是根组件。
+比如我们创建一个talk-cmp的组件：</p>
+<pre><code class="lang-javascript">//TalkCmp.ts
+@Component({
+  selector: &#39;talk-cmp&#39;,
+  directives: [FormattedRating, WatchButton, RateButton],
+  templateUrl: &#39;talk_cmp.html&#39;
+})
+class TalkCmp {
+  @Input() talk: Talk;
+  @Output() rate: EventEmitter;
+  //...
+}
+</code></pre>
+<pre><code class="lang-html">&lt;!--talk_cmp.html--&gt;
+{{talk.title}}
+{{talk.speaker}}
+&lt;formatted-rating [rating]=&quot;talk.rating&quot;&gt;&lt;/formatted-rating&gt;
+&lt;watch-button [talk]=&quot;talk&quot;&gt;&lt;/watch-button&gt;
+&lt;rate-button [talk]=&quot;talk&quot;&gt;&lt;/rate-button&gt;
+</code></pre>
+<p>一个组件有input和output属性，这二个属性可以通过decorator来定义：</p>
+<pre><code class="lang-javascript">class TalkCmp{
+    @Input() talk:Talk;
+    @Output() rate: EventEmitter;
+}
+</code></pre>
+<p>如何理解decorator:</p>
+<pre><code class="lang-javascript">@Component({
+    selector:&quot;app&quot;,
+    template:&quot;Hello World&quot;
+})
+class App{}
+</code></pre>
+<p>上面的代码相当于：</p>
+<pre><code>class App{}
+Component({
+    selector:&#39;app&#39;,
+    template:&#39;Hello world&#39;
+})(App)
+</code></pre><p>input和output属性是组件的暴露在外的公共api,你可以通过下列方式来调用：</p>
+<pre><code class="lang-html">&lt;talk-cmp [talk]=&quot;someExp&quot; (rate)=&quot;eventHandler($event.rating)&quot;&gt;&lt;/talk-cmp&gt;
+</code></pre>
+<p>一个组件有模板，用来定义这个组件是如何在页面中是如何渲染：</p>
+<pre><code class="lang-javascript">@Component({
+    selector:&quot;talk-cmp&quot;,
+    directives:[FormattedRating,WatchButton,RateButton],
+    templateUrl:&quot;talk_cmp.html&quot;
+})
+</code></pre>
+<pre><code class="lang-html">&lt;!--talk_cmp.html--&gt;
+{{talk.title}}
+{{talk.speaker}}
+&lt;formatted-rating [rating]=&quot;talk.rating&quot;&gt;&lt;/formatted-rating&gt;
+&lt;watch-button [talk]=&quot;talk&quot;&gt;&lt;/watch-button&gt;
+&lt;rate-button [talk]=&quot;talk&quot;&gt;&lt;/rate-button&gt;
+</code></pre>
+<p>或者你可以把组件和模板写在一起：</p>
+<pre><code class="lang-javascript">@Component({
+  selector: &#39;talk-cmp&#39;,
+  directives: [FormattedRating, WatchButton, RateButton],
+  template: `
+    {{talk.title}}
+    {{talk.speaker}}
+    &lt;formatted-rating [rating]=&quot;talk.rating&quot;&gt;&lt;/formatted-rating&gt;
+    &lt;watch-button [talk]=&quot;talk&quot;&gt;&lt;/watch-button&gt;
+    &lt;rate-button [talk]=&quot;talk&quot;&gt;&lt;/rate-button&gt;
+  `
+})
+</code></pre>
+<h2 id="-component-lifecycle-">生命周期钩子(Component Lifecycle)</h2>
+<ul>
+<li>ngOnChanges - 当一个input,output的属性改变的时候会触发这个方法</li>
+<li>ngOnInit - 当ngOnChanges调用完了之后</li>
+<li>ngDoCheck - 开发者自定义的change触发的时候</li>
+<li>ngAfterContentInit - 当组件内容初始化的时候</li>
+<li>ngAfterContentChecked - 当组件内容改变的时候</li>
+<li>ngAfterViewInit - 每次检查组件的视图的时候触发</li>
+<li>ngOnDestroy - 组件销毁之前会触发</li>
+</ul>
+<p>比如，我们可以这样：</p>
+<pre><code class="lang-javascript">@Component({selector:&quot;cares-about-changes&quot;})
+class CareAboutChange{
+    @Input()field1;
+    @Input()field2;
+    onChange(changes){
+
+    }
+}
+</code></pre>
+<pre><code class="lang-java">// Annotation section
+@Component({
+  selector: &#39;street-map&#39;,
+  template: &#39;&lt;map-window&gt;&lt;/map-window&gt;&lt;map-controls&gt;&lt;/map-controls&gt;&#39;,
+})
+// Component controller
+class StreetMap {
+  ngOnInit() {
+    // Properties are resolved and things like
+    // this.mapWindow and this.mapControls
+    // had a chance to resolve from the
+    // two child components &lt;map-window&gt; and &lt;map-controls&gt;
+  }
+  ngOnDestroy() {
+    // Speak now or forever hold your peace
+  }
+  ngDoCheck() {
+    // Custom change detection
+  }
+  ngOnChanges(changes) {
+    // Called right after our bindings have been checked but only
+    // if one of our bindings has changed.
+    //
+    // changes is an object of the format:
+    // {
+    //   &#39;prop&#39;: PropertyUpdate
+    // }
+  }
+  ngAfterContentInit() {
+    // Component content has been initialized
+  }
+  ngAfterContentChecked() {
+    // Component content has been Checked
+  }
+  ngAfterViewInit() {
+    // Component views are initialized
+  }
+  ngAfterViewChecked() {
+    // Component views have been checked
+  }
+}
+</code></pre>
+<h2 id="providers">providers</h2>
+<p>组件可以注入很多providers</p>
+<pre><code class="lang-javascript">@Component({
+    selector:&quot;conf-app&quot;,
+    providers:[ConfAppBackend,Logger]
+})
+class TalksApp{
+
+}
+class TalksApp{
+
+}
+class TalksCmp{
+    constructor(backend:ConfAppBackend){
+
+    }
+}
+</code></pre>
+<h2 id="components-">components是自我描述的</h2>
+<ul>
+<li>组件知道如何和宿主元素交互</li>
+<li>组件知道如何渲染自身</li>
+<li>组件配置依赖注入</li>
+<li>组件有自定义的input和output的属性</li>
+</ul>
+<h2 id="zone-js">zone.js</h2>
+<p>ng2内置了zone.js,不再需要一堆的scope.$apply代码</p>
+<h2 id="annotations">Annotations</h2>
+<pre><code class="lang-javascript">@Component({
+  selector: &#39;tabs&#39;
+})
+@View({
+  template: `
+    &lt;ul&gt;
+      &lt;li&gt;Tab 1&lt;/li&gt;
+      &lt;li&gt;Tab 2&lt;/li&gt;
+    &lt;/ul&gt;
+  `
+})
+export class Tabs {
+
+}
+</code></pre>
+<p>@view的使用使得我们可以期待不远的将来我们可以让ng2支持ios和android原生的开发。</p>
+<h2 id="-">事件</h2>
+<pre><code class="lang-javascript">import {Component} from &#39;angular2/core&#39;;
+
+@Component({
+  selector: &#39;counter&#39;,
+  template: `
+    &lt;div&gt;
+      &lt;p&gt;Count: {{ num }}&lt;/p&gt;
+      &lt;button (click)=&quot;increment()&quot;&gt;Increment&lt;/button&gt;
+    &lt;/div&gt;
+  `
+})
+export class Counter {
+  num: number = 0;
+
+  increment() {
+    this.num++;
+  }
+}
+</code></pre>
+<h2 id="-">双向数据绑定</h2>
+<pre><code class="lang-javascript">&lt;input [(ngModel)]=&quot;name&quot; &gt;
+</code></pre>
+<h2 id="projection">Projection</h2>
+<pre><code class="lang-javascript">import {Component, Input} from &#39;angular2/core&#39;;
+
+@Component({
+  selector: &#39;child&#39;,
+  template: `
+    &lt;h4&gt;Child Component&lt;/h4&gt;
+    &lt;ng-content&gt;&lt;/ng-content&gt;
+  `
+})
+class Child {}
+</code></pre>
+<h2 id="ngif-ngswitch-ngfor">ngIf,ngSwitch,ngFor</h2>
+<pre><code class="lang-html">&lt;div *ngIf=&quot;hero&quot;&gt;{{hero}}&lt;/div&gt;
+&lt;div *ngFor=&quot;#hero of heroes&quot;&gt;{{hero}}&lt;/div&gt;
+&lt;div [ngSwitch]=&quot;status&quot;&gt;
+  &lt;template [ngSwitchWhen]=&quot;&#39;in-mission&#39;&quot;&gt;In Mission&lt;/template&gt;
+  &lt;template [ngSwitchWhen]=&quot;&#39;ready&#39;&quot;&gt;Ready&lt;/template&gt;
+  &lt;template ngSwitchDefault&gt;Unknown&lt;/template&gt;
+&lt;/div&gt;
+</code></pre>
+<pre><code>
+@Component({
+    selector:&quot;products-list&quot;,
+    properties:{
+        products:&quot;products&quot;
+    },
+    events:[&#39;click&#39;]
+})
+@View({
+    directives:[For,ProductRow],
+    template:`
+    &lt;div class=&quot;product-list&quot;&gt;
+        &lt;product-row *for=&quot;#product of products&quot;
+            [product]=&quot;product&quot;
+            (click)=&quot;clicke3d(product)&quot;&gt;
+        &lt;/product-row&gt;    
+    &lt;/div&gt;
+})
+
+class ProductsList{
+    products:Array&lt;product&gt;;
+    click:EventEmitter;
+
+    constructor(){
+        this.click = new EventEmitter();
+    }
+
+    clicked(product){
+        this.click.next(product);
+    }
+}
+</code></pre><h2 id="-component-">用component来替代控制器和指令</h2>
+<pre><code class="lang-javascript">angular.module(&#39;app&#39;,[])
+.component(&#39;app&#39;,{
+    restrict:&quot;E&quot;,
+    template:``,
+    controller:class App{
+        constructor(){
+            this.myState = &#39;California&#39;
+        }
+    }
+})
+</code></pre>
+<pre><code>@Component({
+    selector:&#39;app&#39;,
+    template:&#39;&lt;div&gt;&lt;/div&gt;&#39;
+})
+
+class App{
+    myState = &#39;California&#39;
+}
+</code></pre><h2 id="-">事件处理</h2>
+<pre><code class="lang-javascript">angular.module(&#39;app&#39;,[])
+.component(&#39;app&#39;,{
+    restrict:&#39;E&#39;,
+    template:&#39;&#39;,
+    controller:class App{
+        action(e){
+            console.log(e);
+        }
+    }
+})
+</code></pre>
+<pre><code class="lang-javascript">@Component({
+    selector:&#39;app&#39;,
+    template:,
+
+})
+
+class App{
+    action(e){
+        console.log(e);
+    }
+}
+</code></pre>
+<pre><code class="lang-javascript">var metaData = {
+    selector:&#39;home&#39;,
+    template:`
+        &lt;button (click)=&#39;getData()&#39;&gt;Get Server Data&lt;/button&gt;
+    `
+}
+@Component(metadata)
+class Home{
+    text = {};
+    getData(e){
+        setTimeout(() =&gt; {
+            this.text = {res:&#39;something else&#39;};
+            this.text = {res:&#39;data&#39;}
+        },1000)
+    }
+}
+</code></pre>
+<pre><code>@Component({
+    selector:&#39;home&#39;,
+    providers:[providers],
+    template:
+})
+
+class Home{
+    constructor(public service:Service){
+
+    }
+}
+</code></pre><h2 id="-">路由</h2>
+<pre><code class="lang-javascript">@Component(...)
+@RouteConfig([
+    {path:&quot;&quot;,component:IndexCmp},
+    {path:&quot;email/:id&quot;,component:EmailCmp},
+    {path:&quot;search&quot;,component:SearchCmp}
+])
+class AppCmp {}
+</code></pre>
+<h2 id="-">引入样式</h2>
+<ul>
+<li>style</li>
+<li>styleUrls</li>
+</ul>
+<h2 id="-">知识清单</h2>
+<ul>
+<li>bootstrap(MyAppComponent,[MyService,provide(...)]);  引导根组件为MyAppComponent的应用，配置 依赖入入的服务</li>
+<li><input [value]="firstName"> 属性value的值设为firstName</li>
+<li><div [attr.role]="myAriaRole"> 属性role的值设为myAriaRole</li>
+<li><div [class.extra-sparkle="isDelightful"]> 如果isDelightful为true,则添加css类名extra-sparkle</li>
+<li><div [style.width.px]="mySize"> 将width设为mySize,单位可选</li>
+<li><button (click)="readRainbow($event)"> 点击事件触发时执行readRainbow($event)函数</li>
+<li><video #movieplayer...> 创建本地变量moviePlayer</li>
+<li>@injectable声明一个有依赖的类</li>
+</ul>
+<pre><code>System.config({
+    transpiler:&#39;typescript&#39;,
+    typescriptOptions:{emitDecoratorMetadata:true},
+    package:{&#39;app&#39;:{defaultExtension:&#39;ts&#39;}}
+});
+System.import(&quot;app/main&quot;).then(null,console.err.bind(console));
+</code></pre><h2 id="angular-api-">angular API一览</h2>
+<h3 id="-">指令</h3>
+<ul>
+<li>CheckboxControlValueAccessor</li>
+<li>MinLengthValidator</li>
+<li>NgControlName</li>
+<li>NgForm</li>
+<li>NgIf</li>
+<li>NgPluralCase</li>
+<li>NgSwitch</li>
+<li>PatternValidator</li>
+<li>DefaultValueAccessor</li>
+<li>NgClass</li>
+<li>NgControlStatus</li>
+<li>NgFormControl</li>
+<li>NgModel</li>
+<li>NgSelectOption</li>
+<li>NgSwitchDefault</li>
+<li>RequireValidator</li>
+<li>MaxLengthValidator</li>
+<li>NgControlGroupd</li>
+<li>NgFor</li>
+<li>NgFormModel</li>
+<li>NgPlural</li>
+<li>NgStyle</li>
+<li>NgSwitchWhen</li>
+<li>SelecControlValueAccessor</li>
+</ul>
+<h3 id="-">路由相关</h3>
+<ul>
+<li>RouterLink</li>
+</ul>
+<pre><code>@RouteConfig([
+    {path:&quot;/user&quot;,component:userCmp,as:&quot;user&quot;}
+]);
+class MyComp{}
+
+&lt;a [routerLink]=&quot;[&#39;./User&#39;]&quot;&gt;Link to user component&lt;/a&gt;
+</code></pre><ul>
+<li>RouterOutlet</li>
+</ul>
+<h3 id="-">组件</h3>
+<ul>
+<li>Component</li>
+<li>Directive</li>
+<li>Injectable</li>
+<li>Pipe</li>
+</ul>
+<h3 id="-">动画</h3>
+<ul>
+<li>Animation</li>
+<li>AnimationBuilder</li>
+<li>BrowserDetails</li>
+<li>CssAnimationBuilder</li>
+<li>CssAnimationOptions</li>
+<li>AbstractControl</li>
+<li>Control</li>
+<li>ControlGroup</li>
+<li>DecimalPipe</li>
+<li>i18nSelectPipe</li>
+<li>NgControl</li>
+<li>PercentPipe</li>
+<li>SlicePipe</li>
+<li>AbstractControlDirective</li>
+<li>ControlArray</li>
+<li>currencyPipe</li>
+<li>FormBuilder</li>
+<li>jsonPipe</li>
+<li>NgLocalization</li>
+<li>RadioButtonState</li>
+<li>UpperCasePipe</li>
+<li>AsyncPipe</li>
+<li>ControlContainer</li>
+<li>DatePipe</li>
+<li>LowerCasePipe</li>
+<li>NumberPipe</li>
+<li>ReplacePipe</li>
+<li>Validators</li>
+</ul>
+<h3 id="-">编译器</h3>
+<ul>
+<li>attrAst</li>
+<li>BoundEventAst</li>
+<li>CompileTemplateMetaData</li>
+<li>ElementAst</li>
+<li>SourceModule</li>
+<li>TextAst</li>
+<li>XHR</li>
+<li>BoundDirectivePropertyAst</li>
+<li>BoundTextAst</li>
+<li>CompileTypeMeta</li>
+<li>EMbadedTemplateAst</li>
+<li>sourceWithmports</li>
+<li>UrlResolver</li>
+<li>BoundElementPropertyAst</li>
+<li>CompileDirectiveMetadata</li>
+<li>DirectiveAst</li>
+<li>NgContentAst</li>
+<li>TemplateCompiler</li>
+<li>VariableAst</li>
+</ul>
+<h3 id="-">核心</h3>
+<ul>
+<li>AbstractProviderError</li>
+</ul>
+<pre><code class="lang-javascript">export class QuestionBase&lt;T&gt;{
+    value:T;
+    key:string;
+    label:string;
+    required:boolean;
+    order:number;
+    controlType:string;
+
+    constructor(options:{
+        value?:T,
+        key?:string,
+        label?:string,
+        required?:boolean,
+        order?:number,
+        controlType?:string
+    } = {}){
+        this.value = options.value;
+        this.key = options.key || &#39;&#39;;
+        this.label = options.label || &#39;&#39;;
+        this.required = !!options.required;
+        this.order = options.order === undefined?1:options.order;
+    }
+
+}
+</code></pre>
+
+            </div>
+        </div>
+	    <div class="footer">
+            <p>Created with <a href="http://github.com/huytd/azeroth-js">azeroth.js</a></p>
+            <div class="social">
+                <a href="#"><i class="icon-facebook-squared"></i></a>
+                <a href="#"><i class="icon-twitter-squared"></i></a>
+                <a href="#"><i class="icon-linkedin-squared"></i></a>
+                <a href="#"><i class="icon-github-squared"></i></a>
+                <a href="#"><i class="icon-mail-alt"></i></a>
+            </div>
+        </div>
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'Insert-Your-GA-ID-Here', 'auto');
+          ga('send', 'pageview');
+        </script>
+    </body>
+</html>

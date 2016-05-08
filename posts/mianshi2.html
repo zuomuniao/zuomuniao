@@ -1,0 +1,208 @@
+<html>
+    <head>
+        <title> JavaScript面试题精选（二） | Blog</title>
+        <meta charset="utf-8">
+        <meta http-equiv="content-type" content="text/html;"><meta name=viewport content="initial-scale=1.0 maximum-scale=1.0">
+        
+        <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,300&subset=latin,vietnamese' rel='stylesheet' type='text/css'>
+        <link href="../css/theme.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../css/highlight/tomorrow-night.css">
+        <link rel="stylesheet" href="../css/fontello.css">
+        <script src="../js/highlight.pack.js"></script>
+        <script>
+        hljs.initHighlightingOnLoad();
+        </script>
+    </head>
+    <body>
+        <div class="header">
+            <a href="/"><i class="icon icon-emo-coffee"></i> Blog</a>
+        </div>
+        <div class="container">
+            <div class="main">
+                <h1 id="javascript-">JavaScript面试题精选（二）</h1>
+<ul>
+<li>下列打印结果是多少说出理由：</li>
+</ul>
+<pre><code class="lang-javascript">var foo = {n: 1};
+var bar = foo;
+foo.x = foo = {n: 2};
+</code></pre>
+<ul>
+<li>下列打印结果是多少说出理由：</li>
+</ul>
+<pre><code class="lang-javascript">var Person = function(name,age){
+    this.name = name;
+    this.age = age;
+    return {name:&quot;moyu&quot;};
+}
+var xiaoMing = new Person(&quot;xiaoMing&quot;,20);
+</code></pre>
+<ul>
+<li><p>var obj = {}; obj的构造器是___?</p>
+</li>
+<li><p>如果一个字符串是一个基本数据类型，那为什么可以用split方法?</p>
+</li>
+<li><p>是否可以用typeof bar === &#39;object&#39;决定bar是不是对象，如果不可以，一般要用啥方法?</p>
+</li>
+</ul>
+<ul>
+<li>下面的代码结果是多少并说出为什么?</li>
+</ul>
+<pre><code class="lang-javascript">var myObject = {
+    foo: &quot;bar&quot;,
+    func: function() {
+        var self = this;
+        console.log(&quot;outer func:  this.foo = &quot; + this.foo);
+        console.log(&quot;outer func:  self.foo = &quot; + self.foo);
+        (function() {
+            console.log(&quot;inner func:  this.foo = &quot; + this.foo);
+            console.log(&quot;inner func:  self.foo = &quot; + self.foo);
+        }());
+    }
+};
+myObject.func();
+</code></pre>
+<ul>
+<li>下面代码结果：</li>
+</ul>
+<pre><code class="lang-javascript">(function() {
+    console.log(1); 
+    setTimeout(function(){console.log(2)}, 1000); 
+    setTimeout(function(){console.log(3)}, 0); 
+    console.log(4);
+})();
+</code></pre>
+<ul>
+<li>执行下面的代码以后，点击第四个button,打印出来什么?</li>
+</ul>
+<pre><code class="lang-javascript">for (var i = 0; i &lt; 5; i++) {
+  var btn = document.createElement(&#39;button&#39;);
+  btn.addEventListener(&#39;click&#39;, function(){ console.log(i); });
+  document.body.appendChild(btn);
+}
+</code></pre>
+<ul>
+<li>下面代码结果：</li>
+</ul>
+<pre><code class="lang-javascript">var arr1 = &quot;john&quot;.split(&#39;&#39;);
+var arr2 = arr1.reverse();
+var arr3 = &quot;jones&quot;.split(&#39;&#39;);
+arr2.push(arr3);
+console.log(&quot;array 1: length=&quot; + arr1.length + &quot; last=&quot; + arr1.slice(-1));
+console.log(&quot;array 2: length=&quot; + arr2.length + &quot; last=&quot; + arr2.slice(-1));
+</code></pre>
+<ul>
+<li>下面代码结果：</li>
+</ul>
+<pre><code class="lang-javascript">console.log(1 +  &quot;2&quot; + &quot;2&quot;);//122
+console.log(1 +  +&quot;2&quot; + &quot;2&quot;);//32
+console.log(1 +  -&quot;1&quot; + &quot;2&quot;);//02
+console.log(+&quot;1&quot; +  &quot;1&quot; + &quot;2&quot;);//112
+console.log( &quot;A&quot; - &quot;B&quot; + &quot;2&quot;);//NaN2
+console.log( &quot;A&quot; - &quot;B&quot; + 2);//NaN
+</code></pre>
+<ul>
+<li>下面代码结果：</li>
+</ul>
+<pre><code class="lang-javascript">console.log(&quot;0 || 1 = &quot;+(0 || 1));//1
+console.log(&quot;1 || 2 = &quot;+(1 || 2));//1
+console.log(&quot;0 &amp;&amp; 1 = &quot;+(0 &amp;&amp; 1));//0
+console.log(&quot;1 &amp;&amp; 2 = &quot;+(1 &amp;&amp; 2));//2
+</code></pre>
+<ul>
+<li>下面代码结果：</li>
+</ul>
+<pre><code class="lang-javascript">console.log(false == &#39;0&#39;);//true
+console.log(false === &#39;0&#39;);//false
+</code></pre>
+<pre><code class="lang-javascript">自身作为布尔值：0,NaN,&#39;&#39;、null、undefined
+
+if(){
+
+}
+
+
+两个等于号比较
+1 [1] &#39;1&#39; --&gt; true
+</code></pre>
+<ul>
+<li>下面代码结果：</li>
+</ul>
+<pre><code class="lang-javascript">var a={},
+    b={key:&#39;b&#39;},
+    c={key:&#39;c&#39;};
+
+a[b]=123;//a[&#39;[object Object]&#39;] = 123;
+a[c]=456;//a[&#39;[object Object]&#39;] = 456;
+
+console.log(a[b]);
+</code></pre>
+<ul>
+<li>下面代码结果：</li>
+</ul>
+<pre><code class="lang-javascript">//递归
+console.log((function f(n){return ((n &gt; 1) ? n * f(n-1) : n)})(10));
+</code></pre>
+<ul>
+<li>下面代码结果</li>
+</ul>
+<pre><code class="lang-javascript">(function(x) {
+    return (function(y) {
+        console.log(this);//window
+        console.log(x);
+    })(2)
+})(1);
+</code></pre>
+<ul>
+<li>下面代码结果:</li>
+</ul>
+<pre><code class="lang-javascript">var hero = {
+    _name: &#39;John Doe&#39;,
+    getSecretIdentity: function (){
+        return this._name;
+    }
+};
+
+var stoleSecretIdentity = hero.getSecretIdentity;
+
+console.log(stoleSecretIdentity());
+console.log(stoleSecretIdentity.call(hero));
+console.log(hero.getSecretIdentity());
+</code></pre>
+<ul>
+<li>下面代码结果:</li>
+</ul>
+<pre><code class="lang-javascript">var i=10;  
+var j=3;  
+function a() {  
+    console.log(i);
+    console.log(j); 
+    var i = 2;  
+    console.log(i);
+};  
+a();
+</code></pre>
+
+            </div>
+        </div>
+	    <div class="footer">
+            <p>Created with <a href="http://github.com/huytd/azeroth-js">azeroth.js</a></p>
+            <div class="social">
+                <a href="#"><i class="icon-facebook-squared"></i></a>
+                <a href="#"><i class="icon-twitter-squared"></i></a>
+                <a href="#"><i class="icon-linkedin-squared"></i></a>
+                <a href="#"><i class="icon-github-squared"></i></a>
+                <a href="#"><i class="icon-mail-alt"></i></a>
+            </div>
+        </div>
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'Insert-Your-GA-ID-Here', 'auto');
+          ga('send', 'pageview');
+        </script>
+    </body>
+</html>

@@ -1,0 +1,108 @@
+<html>
+    <head>
+        <title> coffee学习 | Blog</title>
+        <meta charset="utf-8">
+        <meta http-equiv="content-type" content="text/html;"><meta name=viewport content="initial-scale=1.0 maximum-scale=1.0">
+        
+        <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,300&subset=latin,vietnamese' rel='stylesheet' type='text/css'>
+        <link href="../css/theme.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../css/highlight/tomorrow-night.css">
+        <link rel="stylesheet" href="../css/fontello.css">
+        <script src="../js/highlight.pack.js"></script>
+        <script>
+        hljs.initHighlightingOnLoad();
+        </script>
+    </head>
+    <body>
+        <div class="header">
+            <a href="/"><i class="icon icon-emo-coffee"></i> Blog</a>
+        </div>
+        <div class="container">
+            <div class="main">
+                <h1 id="coffee-">coffee学习</h1>
+<h2 id="-">安装</h2>
+<pre><code>npm install --save-dev gulp-coffee
+</code></pre><h2 id="-gulp">配置gulp</h2>
+<pre><code>var gulp = require(&quot;gulp&quot;);
+var gutil = require(&quot;gulp-util&quot;);
+var coffee = require(&#39;gulp-coffee&#39;);
+
+gulp.task(&#39;default&#39;, function() {
+  gulp.src(&#39;./coffee/*.coffee&#39;)
+    .pipe(coffee({bare: true}).on(&#39;error&#39;, gutil.log))
+    .pipe(gulp.dest(&#39;./js/&#39;));
+});
+</code></pre><h2 id="-">语法</h2>
+<pre><code class="lang-javascript"># 我是看不见的注释
+
+###
+我是多行可以看见的注释
+###
+
+#条件赋值
+isTrue = true
+m = 100 if true
+console.log m
+
+
+#解构赋值
+[a,b,c,d] = [1,2,3,4]
+console.log a,b,c,d
+
+[e,f,g] = [5..7]
+console.log e,f,g
+
+
+#类
+class Person
+    constructor:(name,age)-&gt;
+        @name = name
+        @age = age
+
+    sayHello:-&gt;
+        console.log &quot;Hello world&quot;
+    run:-&gt;
+        console.log &quot;run&quot;
+    add:(a,b)-&gt;
+        console.log a + b
+
+#对象3
+xiaoMing = new Person &quot;eric&quot;,20
+
+console.log xiaoMing
+
+console.log xiaoMing.add 100,200
+xiaoMing.sayHello()
+xiaoMing.run()
+
+#字面量对象
+xiaoWang = 
+    name:eric,
+    age:10
+
+console.log xiaoWang
+</code></pre>
+
+            </div>
+        </div>
+	    <div class="footer">
+            <p>Created with <a href="http://github.com/huytd/azeroth-js">azeroth.js</a></p>
+            <div class="social">
+                <a href="#"><i class="icon-facebook-squared"></i></a>
+                <a href="#"><i class="icon-twitter-squared"></i></a>
+                <a href="#"><i class="icon-linkedin-squared"></i></a>
+                <a href="#"><i class="icon-github-squared"></i></a>
+                <a href="#"><i class="icon-mail-alt"></i></a>
+            </div>
+        </div>
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'Insert-Your-GA-ID-Here', 'auto');
+          ga('send', 'pageview');
+        </script>
+    </body>
+</html>
