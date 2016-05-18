@@ -47,3 +47,9 @@
 ## action sheet(写todoList感觉最方便的工具)
 
 ## totoiseGit
+
+## updtr
+[无痛更新node包](https://github.com/peerigon/updtr)
+
+## 在线分享代码
+http://jsbin.com/

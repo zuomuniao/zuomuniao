@@ -9,3 +9,4 @@
 - [Angular2学习指南](/#/ng2_learn)
 - [不错的文章收藏](/#/shoucang)
 - [效率工具总结](/#/xiaolv)
+- [高性能Web笔记](/#/high_performance_web)
